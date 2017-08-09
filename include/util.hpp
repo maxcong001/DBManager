@@ -6,6 +6,7 @@
 #include <atomic>
 #include <iostream>
 #include <algorithm>
+#include <mutex>
 #include "logger.hpp"
 
 #define MAGIC_STRING "MAXX MAGIC!!!"

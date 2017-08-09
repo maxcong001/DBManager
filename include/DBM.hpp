@@ -5,3 +5,4 @@
 #include "DBManager.hpp"
 #include "RedisDB.hpp"
 #include "RedisManager.hpp"
+#include "singleton.hpp"
