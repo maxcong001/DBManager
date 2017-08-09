@@ -29,42 +29,64 @@
 template <typename T>
 class Singleton
 {
-  public:
-    template <typename... Args>
-    static T *Instance(Args &&... args)
-    {
-        std::lock_guard<std::mutex> lck(mtx);
-        if (m_pInstance == nullptr)
-            m_pInstance = new T(std::forward<Args>(args)...);
-        return m_pInstance;
-    }
-    static T *GetInstance()
-    {
-        std::lock_guard<std::mutex> lck(mtx);
-        if (m_pInstance == nullptr)
-            throw std::logic_error(
-                "the instance is not init, please initialize the instance first");
-        return m_pInstance;
-    }
-    static void DestroyInstance()
-    {
-        std::lock_guard<std::mutex> lck(mtx);
-        delete m_pInstance;
-        m_pInstance = nullptr;
-    }
+public:
+  template <typename... Args>
+  static T *Instance(Args &&... args);
 
-  private:
-    Singleton(void);
-    virtual ~Singleton(void);
-    Singleton(const Singleton &);
-    Singleton &operator=(const Singleton &);
+  static T *Instance();
+  static T *GetInstance();
 
-  private:
-    static T *m_pInstance;
-    static std::mutex mtx;
+  static void DestroyInstance();
+
+private:
+  Singleton(void);
+  virtual ~Singleton(void);
+  Singleton(const Singleton &);
+  Singleton &operator=(const Singleton &);
+
+private:
+  static T *m_pInstance;
+  static std::mutex mtx;
 };
 
-template <class T>
+template <typename T>
 T *Singleton<T>::m_pInstance = nullptr;
-template <class T>
+template <typename T>
 std::mutex Singleton<T>::mtx;
+
+template <typename T>
+template <class... Args>
+T *Singleton<T>::Instance(Args &&... args)
+{
+  std::lock_guard<std::mutex> lck(mtx);
+  if (m_pInstance == nullptr)
+    m_pInstance = new T(std::forward<Args>(args)...);
+  return m_pInstance;
+}
+
+template <typename T>
+T *Singleton<T>::Instance()
+{
+  std::lock_guard<std::mutex> lck(mtx);
+  if (m_pInstance == nullptr)
+    m_pInstance = new T();
+  return m_pInstance;
+}
+
+template <typename T>
+T *Singleton<T>::GetInstance()
+{
+  std::lock_guard<std::mutex> lck(mtx);
+  if (m_pInstance == nullptr)
+    throw std::logic_error(
+        "the instance is not init, please initialize the instance first");
+  return m_pInstance;
+}
+
+template <typename T>
+void Singleton<T>::DestroyInstance()
+{
+  std::lock_guard<std::mutex> lck(mtx);
+  delete m_pInstance;
+  m_pInstance = nullptr;
+}

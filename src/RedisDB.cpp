@@ -115,7 +115,7 @@ std::string RedisDB::GenCommand(RedisDBCmdType::type cmdType)
         else
         {
             __LOG(error, "genConfigFile return fail!");
-            return false;
+            return cmd;
         }
 
         cmd = redisSrvCmd + " " + cfgName + " &" + " > /dev/null";

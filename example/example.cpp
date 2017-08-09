@@ -1,13 +1,13 @@
 
 #include "DBM.hpp"
-#include <unistd.h>
+
 int main()
 {
     set_log_level(logger_iface::log_level::debug);
 
     RedisConnInfo info = RedisConnInfo("127.0.0.1", "6380", "");
 
-    auto dbm = Singleton<RedisManager>::Instance();
+    auto dbm = new RedisManager();
 
     int index = dbm->add(&info);
     if (!index)
@@ -19,5 +19,8 @@ int main()
     sleep(3);
 
     dbm->del(&info);
+
+    delete(dbm);
+    dbm = NULL;
 
 }
