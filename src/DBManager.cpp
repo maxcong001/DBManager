@@ -1,11 +1,6 @@
 #include "DBManager.hpp"
 
-DBManager::~DBManager(void)
+DBManager::~DBManager()
 {
-    return;
 }
 
-DBManager::DBManager(void *connect_info)
-{
-    return;
-}

@@ -1,32 +1,28 @@
-# Prerequisites
-*.d
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Makefile
+cmake_install.cmake
+install_manifest.txt
+CTestTestfile.cmake
 *.out
-*.app
+*.lua
+/tmp
+/build
+/bin
+/lib
+Makefile
+CMakeFiles
+CMakeCache.txt
+out
+*.cmake
+*.o
+*.a
+*.so
+*.tar
+*.tar.gz
+*.zip
+*.rdb
+*.cov
+core.*
