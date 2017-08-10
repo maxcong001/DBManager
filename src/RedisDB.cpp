@@ -97,7 +97,6 @@ bool RedisDB::genConfigFile(std::string &CfgName)
     return true;
 }
 
-
 std::string RedisDB::GenCommand(RedisDBCmdType::type cmdType)
 {
     std::string cmd = "", str, cfgName;
@@ -170,12 +169,12 @@ bool RedisDB::portIsUsed()
 
     if (WIFEXITED(status) && (WEXITSTATUS(status) == 0))
     {
-
+        __LOG(warn, "port " << info.ListenPort << " is used!!!!");
         return true;
     }
     else
     {
-        __LOG(error, "exec command " << cmd << " .......return fail");
+        __LOG(debug, "port " << info.ListenPort << " is not used");
         return false;
     }
 }
