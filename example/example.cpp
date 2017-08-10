@@ -7,7 +7,7 @@ int main()
 
     RedisConnInfo info = RedisConnInfo("127.0.0.1", "6380", "");
 
-    auto dbm = new RedisManager();
+    DBManager *dbm = new RedisManager();
 
     int index = dbm->add(&info);
     if (!index)
@@ -20,7 +20,6 @@ int main()
 
     dbm->del(&info);
 
-    delete(dbm);
+    delete (dbm);
     dbm = NULL;
-
 }

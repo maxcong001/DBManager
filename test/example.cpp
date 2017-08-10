@@ -8,7 +8,7 @@ int main()
 
     RedisConnInfo info = RedisConnInfo("127.0.0.1", "6380", "");
 
-    auto dbm = Singleton<RedisManager>::Instance();
+    DBManager *dbm = Singleton<RedisManager>::Instance();
 
     int index = dbm->add(&info);
     if (!index)
@@ -22,5 +22,4 @@ int main()
     dbm->del(&info);
 
     Singleton<RedisManager>::DestroyInstance();
-
 }
