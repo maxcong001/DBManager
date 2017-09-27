@@ -21,6 +21,7 @@ class RedisConnInfo
     std::string PassWd;
     std::string ListenIP;
     std::string ListenPort;
+    std::string UnixSocket;
 
   public:
     RedisConnInfo()
@@ -33,9 +34,10 @@ class RedisConnInfo
         PassWd.clear();
         ListenIP.clear();
         ListenPort.clear();
+        UnixSocket.clear();
     }
 
-    RedisConnInfo(std::string ip, std::string port, std::string pw = "")
+    RedisConnInfo(std::string ip, std::string port, std::string pw = "", std::string Unix_socket_path = "")
     {
 
         Magic = MAGIC_NUM;
@@ -45,7 +47,10 @@ class RedisConnInfo
         PassWd = pw;
         ListenIP = ip;
         ListenPort = port;
+        UnixSocket = Unix_socket_path;
     }
+
+
     bool operator==(const RedisConnInfo &rhs)
     {
         return Magic == rhs.Magic && AuthReq == rhs.AuthReq && !((PassWd).compare(rhs.PassWd)) && !((ListenIP).compare(rhs.ListenIP)) && !((ListenPort).compare(rhs.ListenPort));

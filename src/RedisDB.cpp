@@ -68,8 +68,22 @@ bool RedisDB::genConfigFile(std::string &CfgName)
     else
     {
         __LOG(debug, "config with port " << info.ListenPort);
-        config_string += "port " + (info.ListenPort);
+        config_string += "port " + (info.ListenPort) + "\n";
     }
+
+    // for unix socket
+    if ((info.UnixSocket).empty())
+    {
+        __LOG(debug, "empty port, use default port 6379");
+        config_string += "unixsocket /tmp/redis.sock\n";
+    }
+    else
+    {
+        __LOG(debug, "config with port " << info.ListenPort);
+
+        config_string += "unixsocket " + info.UnixSocket + "\n";
+    }
+
     std::string CfgName_tmp = info.PassWd + info.ListenIP + info.ListenPort;
     if (CfgName_tmp.empty())
     {
